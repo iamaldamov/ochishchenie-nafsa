@@ -106,13 +106,42 @@ html{scroll-padding-top:64px}.nav{height:64px;padding:0 13px}.progress{top:64px}
 }
 @media(max-width:380px){.nav-read{font-size:9px;padding:8px}.tool{min-width:26px}.promise-grid{grid-template-columns:1fr}.promise-item{min-height:unset}.actions{flex-direction:column;align-items:stretch}.actions .btn{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.hero-book{animation:none}.journey{min-height:auto}.book-stage{position:relative;top:auto;height:420px}.book-cover{transform:rotateY(-155deg)!important}.leaf-one{transform:rotateY(-165deg)!important}.leaf-two{transform:rotateY(-150deg)!important}}
+
+/* Question cards: a quiet, tactile alternative to the scroll-book animation */
+.questions{padding:112px clamp(20px,7vw,110px);background:var(--forest);color:#f3efe5;position:relative;overflow:hidden}
+.questions:before{content:"";position:absolute;width:540px;height:540px;border:1px solid rgba(226,200,151,.12);border-radius:50%;right:-210px;top:-260px;box-shadow:0 0 0 34px rgba(226,200,151,.025),0 0 0 70px rgba(226,200,151,.02);pointer-events:none}
+.questions-inner{max-width:1160px;margin:auto;position:relative;z-index:1}
+.questions-head{max-width:760px;margin:0 auto 42px;text-align:center}
+.questions-head h2{font-size:clamp(36px,5vw,60px);line-height:1.08;letter-spacing:-.045em;font-weight:500;margin:16px 0}
+.questions-head p{font:13px/1.8 var(--sans);color:rgba(243,239,229,.66);max-width:580px;margin:auto}
+.flip-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.flip-card{appearance:none;border:0;padding:0;background:none;color:inherit;text-align:left;min-width:0;min-height:290px;perspective:1100px;cursor:pointer;font:inherit}
+.flip-card:focus-visible{outline:2px solid var(--gold2);outline-offset:5px;border-radius:15px}
+.flip-inner{position:relative;display:block;width:100%;height:100%;min-height:290px;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.2,.72,.2,1)}
+.flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:25px;border-radius:15px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid rgba(226,200,151,.2);background:linear-gradient(145deg,#263d30,#1b3026);box-shadow:0 12px 32px rgba(0,0,0,.13)}
+.flip-front:after{content:"";position:absolute;width:110px;height:110px;right:-52px;bottom:-54px;border:1px solid rgba(226,200,151,.2);border-radius:50%;box-shadow:0 0 0 14px rgba(226,200,151,.025);pointer-events:none}
+.flip-no{font:700 9px var(--sans);letter-spacing:.18em;color:var(--gold2)}
+.flip-q{font:500 clamp(21px,2.2vw,27px)/1.22 var(--serif);letter-spacing:-.02em;max-width:300px}
+.flip-hint{font:10px var(--sans);color:rgba(243,239,229,.58);display:flex;gap:10px;align-items:center}
+.flip-hint b{font-size:16px;color:var(--gold2);font-weight:400}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(145deg,#eee6d7,#ded2bb);color:#26362b;border-color:rgba(196,161,109,.5)}
+.flip-back .flip-no{color:#947449}
+.flip-a{font:13px/1.8 var(--sans);color:#485449}
+.flip-source{font:700 9px/1.5 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#80663e}
+.flip-source span{font-weight:500;text-transform:none;letter-spacing:0;color:#737b6d}
+.questions-foot{max-width:700px;text-align:center;margin:28px auto 0;font:11px/1.8 var(--sans);color:rgba(243,239,229,.5)}
+@media(max-width:900px){.flip-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.questions{padding:82px 16px}.questions-head{margin-bottom:28px}.questions-head h2{font-size:38px}.flip-grid{grid-template-columns:1fr;gap:10px}.flip-card,.flip-inner{min-height:230px}.flip-front,.flip-back{padding:23px}.flip-q{font-size:25px}.flip-a{font-size:12px;line-height:1.7}}
+@media(prefers-reduced-motion:reduce){.flip-inner{transition:none}}
+
 </style>
 </head>
 <body>
 <header class="nav">
 <a class="brand" href="#top" aria-label="Очищение нафса — главная"><span class="brand-mark">۞</span><span class="brand-name">Очищение нафса<small>Путь внутреннего исправления</small></span></a>
 <nav class="nav-links" aria-label="Навигация"><a href="#story">Смысл книги</a><a href="#meaning">Коран и Сунна</a><a href="#inside">Что внутри</a><a href="#reader">Читать</a></nav>
-<div class="nav-tools"><button class="tool" id="font-down" type="button" aria-label="Уменьшить текст">A−</button><button class="tool" id="font-up" type="button" aria-label="Увеличить текст">A+</button><button class="tool" id="theme-toggle" type="button" aria-label="Сменить тему" aria-pressed="false">◐</button><a class="nav-read" href="#reader">Открыть книгу ↗</a></div>
+<div class="nav-tools"><button class="tool" id="font-down" type="button" aria-label="Уменьшить текст">A−</button><button class="tool" id="font-up" type="button" aria-label="Увеличить текст">A+</button><button class="tool" id="theme-toggle" type="button" aria-label="Сменить тему" aria-pressed="false">◐</button></div>
 </header>
 <div class="progress" aria-hidden="true"><span id="progress-fill"></span></div>
 <main>
@@ -124,19 +153,36 @@ html{scroll-padding-top:64px}.nav{height:64px;padding:0 13px}.progress{top:64px}
 <div class="hero-facts reveal"><span>7 содержательных глав</span><span>Практика на каждый день</span><span>Чтение бесплатно</span></div></div>
 <div class="hero-art" aria-label="Обложка книги"><div class="orbit"></div><div class="hero-book"><div class="cover"><div class="cover-inner"><div class="cover-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div><div class="cover-title">Очищение<span>нафса</span></div><div class="cover-rule"></div><div class="cover-sub">Путь внутреннего<br>исправления</div><div class="cover-seal">۞</div></div></div></div><div class="hero-caption">Книга, к которой возвращаются</div></div>
 </section>
-<section class="manifesto"><div class="eyebrow reveal">Не только о внешних достижениях</div><h2 class="reveal">Можно привести в порядок жизнь.<br>Но <em>кто приведёт в порядок сердце?</em></h2><p class="reveal">Работа, деньги, планы и сила воли важны. Но человек сталкивается и с другой борьбой — когда нужно признать ошибку, удержать язык, справиться с завистью или отказаться от желания, которое уводит от правильного.</p></section>
-<section class="journey" id="story">
-<div class="journey-copy">
-<div class="step"><div class="step-no">01 / УВИДЕТЬ</div><h2>Не всякая борьба видна окружающим.</h2><p>Иногда самое трудное происходит внутри: ты раздражён, но называешь это принципиальностью. Завидуешь, но объясняешь это справедливостью. Оправдываешь привычку, хотя сам понимаешь, что она тебя разрушает.</p></div>
-<div class="step"><div class="step-no">02 / ПОНЯТЬ</div><h2>Назвать слабость — не значит сдаться ей.</h2><p>Книга помогает разобраться в намерении, болезнях сердца, покаянии и внутренней дисциплине. Не для того, чтобы осуждать себя, а чтобы перестать прятаться от правды и понять, над чем работать.</p></div>
-<div class="step"><div class="step-no">03 / ДЕЙСТВОВАТЬ</div><h2>Перемены начинаются с конкретного шага.</h2><p>Не с громкого обещания «с понедельника стать другим». С одного удержанного слова. С признанной ошибки. С возвращённого права. С намаза, который ты перестал откладывать. С привычки, которую ты начал менять.</p></div>
+<section class="manifesto"><div class="eyebrow reveal">Не только о внешних достижениях</div><h2 class="reveal">Можно обеспечить семью и добиться успеха.<br>Но <em>умеешь ли ты управлять собой?</em></h2><p class="reveal">Работа, деньги и ответственность важны. Но есть борьба, которую никто не видит: не ответить грубостью, не поддаться зависти, признать ошибку, сохранить искренность и отказаться от запретного, даже когда никто не узнает. Именно здесь проявляется состояние сердца.</p></section>
+<section class="questions" id="story">
+<div class="questions-inner">
+  <div class="questions-head">
+    <div class="eyebrow reveal">Остановись и задумайся</div>
+    <h2 class="reveal">Вопросы, от которых зависит не только настроение.</h2>
+    <p class="reveal">Нажми на карточку. Сначала прочитай вопрос — затем открой короткий ответ и напоминание из исламских источников.</p>
+  </div>
+  <div class="flip-grid">
+    <button class="flip-card reveal" type="button" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-no">01 / О СЕБЕ</span><span class="flip-q">Почему я повторяю ошибку, хотя знаю, что она мне вредит?</span><span class="flip-hint">Нажми, чтобы узнать ответ <b>↗</b></span></span><span class="flip-back"><span class="flip-no">ОТВЕТ</span><span class="flip-a">Потому что одного знания мало. Нужно распознать желание, которое толкает к поступку, и перестать оправдывать его. Очищение нафса начинается с честного признания проблемы.</span><span class="flip-source">Коран, 91:9–10 · <span>Очищение души</span></span></span></span>
+    </button>
+    <button class="flip-card reveal" type="button" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-no">02 / О СИЛЕ</span><span class="flip-q">Если я не умею сдерживать гнев, можно ли назвать себя сильным?</span><span class="flip-hint">Нажми, чтобы узнать ответ <b>↗</b></span></span><span class="flip-back"><span class="flip-no">ОТВЕТ</span><span class="flip-a">Посланник Аллаха ﷺ связал настоящую силу с умением владеть собой во время гнева. Сила — не сорваться, не унизить и не причинить вред в минуту ярости.</span><span class="flip-source">Сахих аль-Бухари, 6114 · <span>Сила самообладания</span></span></span></span>
+    </button>
+    <button class="flip-card reveal" type="button" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-no">03 / О НАМЕРЕНИИ</span><span class="flip-q">Почему мне так важно, что обо мне подумают люди?</span><span class="flip-hint">Нажми, чтобы узнать ответ <b>↗</b></span></span><span class="flip-back"><span class="flip-no">ОТВЕТ</span><span class="flip-a">Когда одобрение людей становится главной целью, поступки начинают зависеть от чужих взглядов. Искренность возвращает вопрос к основе: ради кого и ради чего я это делаю?</span><span class="flip-source">Тема намерения · <span>Сердце и искренность</span></span></span></span>
+    </button>
+    <button class="flip-card reveal" type="button" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-no">04 / О ХАРАКТЕРЕ</span><span class="flip-q">Почему признать свою неправоту бывает труднее, чем спорить?</span><span class="flip-hint">Нажми, чтобы узнать ответ <b>↗</b></span></span><span class="flip-back"><span class="flip-no">ОТВЕТ</span><span class="flip-a">Гордыня заставляет защищать образ себя даже тогда, когда ты ошибся. Смирение не унижает человека: оно помогает увидеть правду, попросить прощения и исправить причинённый вред.</span><span class="flip-source">История Юсуфа, мир ему · <span>Коран, 12:91–92</span></span></span></span>
+    </button>
+    <button class="flip-card reveal" type="button" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-no">05 / О ПОКАЯНИИ</span><span class="flip-q">Что делать, если я снова возвращаюсь к одному и тому же греху?</span><span class="flip-hint">Нажми, чтобы узнать ответ <b>↗</b></span></span><span class="flip-back"><span class="flip-no">ОТВЕТ</span><span class="flip-a">Не оправдывать грех и не отчаиваться в милости Аллаха. Искреннее покаяние предполагает оставить грех, сожалеть о нём и твёрдо намереваться не возвращаться. Если затронуты права людей — вернуть их или попросить прощения.</span><span class="flip-source">Тауба · <span>Возвращение к Аллаху</span></span></span></span>
+    </button>
+    <button class="flip-card reveal" type="button" aria-pressed="false">
+      <span class="flip-inner"><span class="flip-front"><span class="flip-no">06 / О ПЕРЕМЕНАХ</span><span class="flip-q">С чего начать, если я хочу изменить себя, но не знаю как?</span><span class="flip-hint">Нажми, чтобы узнать ответ <b>↗</b></span></span><span class="flip-back"><span class="flip-no">ОТВЕТ</span><span class="flip-a">Начни с одной конкретной слабости. Заметь, когда она проявляется, что ей предшествует и какой поступок должен её заменить. Маленькое постоянное исправление лучше громких обещаний без действий.</span><span class="flip-source">Практика книги · <span>От знания к поступку</span></span></span></span>
+    </button>
+  </div>
+  <p class="questions-foot">Эти вопросы — не диагноз и не повод осуждать себя. Это приглашение посмотреть на своё состояние честно и начать исправление.</p>
 </div>
-<div class="book-stage"><div class="book-model" id="scroll-book" aria-hidden="true">
-<div class="pages"><div class="spread"><div class="page-col"><div class="page-label">Внутренняя работа</div><h3 class="page-heading">Сначала — честность с собой</h3><div class="page-line"></div><p class="page-copy">Человек не исправляет то, что отказывается замечать. Самоотчёт помогает увидеть поступок, его причину и тот вред, который нужно устранить.</p></div><div class="page-col"><div class="page-label">Путь очищения</div><div class="page-quote">«Преуспел тот, кто очистил её…»</div><div class="page-line"></div><p class="page-copy">Коран напоминает о ценности очищения души. Эта работа требует знания, искренности, покаяния и постоянства.</p></div></div>
-<div class="leaf leaf-one"><div class="leaf-copy"><strong>Намерение</strong>Что движет мной в этом поступке? Ради чего я это делаю? Кого я хочу впечатлить — и не забываю ли о довольстве Аллаха?</div></div>
-<div class="leaf leaf-two"><div class="leaf-copy"><strong>Самообладание</strong>Что я делаю в момент гнева? Могу ли остановиться, прежде чем причиню вред словом или поступком?</div></div><div class="spine"></div></div>
-<div class="book-cover"><div class="cover-front"><div class="cover-text"><div class="arabic">بِسْمِ اللَّهِ</div><h3>Очищение<span>нафса</span></h3><p>Путь внутреннего исправления</p><div class="seal">۞</div></div></div><div class="cover-inside"><div class="inside-quote">Первый шаг — честно увидеть то, что можешь исправить сегодня.<small>Авторское напоминание</small></div></div></div>
-</div><div class="scroll-hint"><span>↓</span>Листай дальше — книга откроется</div></div>
 </section>
 <section class="meaning" id="meaning">
 <div class="meaning-head"><div class="eyebrow reveal">Красота откровения — в его руководстве</div><h2 class="reveal">Не мотивационные лозунги.<br>Напоминания, которые возвращают к главному.</h2><p class="reveal">Коран и Сунна учат очищению, искренности, терпению, милосердию и ответственности. Ниже — несколько напоминаний, на которых раскрываются темы книги.</p></div>
@@ -147,14 +193,14 @@ html{scroll-padding-top:64px}.nav{height:64px;padding:0 13px}.progress{top:64px}
 <article class="meaning-card dark-card reveal"><div><div class="card-index">САХИХ АЛЬ-БУХАРИ · 6114</div><div class="hadith-quote">«Сильный — тот, кто владеет собой во время гнева».</div><p>Так передаётся смысл слов Посланника Аллаха ﷺ. Сила — не в том, чтобы подавить другого. Важная часть силы — не позволить гневу управлять собственными словами и действиями.</p></div><a class="ref" href="https://sunnah.com/bukhari:6114" target="_blank" rel="noopener">Проверить хадис ↗</a></article>
 </div></section>
 <section class="promise" id="inside"><div class="promise-inner">
-<div class="promise-head"><div><div class="kicker">Что ты найдёшь в этой книге</div><h2>Меньше общих слов.<br>Больше ясности и работы.</h2></div><p>Это бесплатное издание — самостоятельное знакомство с темой. Оно не обещает мгновенного преображения. Его задача — помочь увидеть внутренние причины поступков и показать первые шаги исправления.</p></div>
+<div class="promise-head"><div><div class="kicker">Что ты найдёшь в этой книге</div><h2>Узнать себя.<br>Начать исправление.</h2></div><p>Нафс связан с желаниями, побуждениями и внутренней борьбой человека. Если не работать над ним, привычки и страсти могут управлять решениями. Книга помогает распознавать эти причины и возвращать поступки к тому, что угодно Аллаху.</p></div>
 <div class="promise-grid">
 <div class="promise-item"><small>01 / РАЗОБРАТЬСЯ</small><h3>Понять нафс</h3><p>Разобраться, что подразумевается под нафсом в исламских текстах и почему важно изучать своё внутреннее состояние.</p></div>
 <div class="promise-item"><small>02 / РАСПОЗНАТЬ</small><h3>Увидеть болезни сердца</h3><p>Замечать гордыню, зависть, показуху, злословие, гнев и самооправдание в повседневных ситуациях.</p></div>
 <div class="promise-item"><small>03 / ВЕРНУТЬСЯ</small><h3>Понять таубу</h3><p>Разобраться в смысле покаяния, ответственности за причинённый вред и возвращения к правильным поступкам.</p></div>
 <div class="promise-item"><small>04 / НАЧАТЬ</small><h3>Перейти к практике</h3><p>Использовать семь дней наблюдения и исправления как первый организационный шаг — без обещания лёгкого результата.</p></div>
 </div>
-<p class="promise-note">Главное после чтения — не ощущение вдохновения на один вечер, а честный ответ на вопрос: что я понял о себе и какой конкретный поступок готов изменить?</p>
+<p class="promise-note">Цель не в том, чтобы казаться безупречным. Цель — замечать ошибку, возвращаться к Аллаху и день за днём исправлять свои поступки.</p>
 </div></section>
 <section class="mid-cta" id="full-book"><div class="eyebrow">Для тех, кто готов идти глубже</div><h2>Это только первое знакомство с темой.</h2><p>В полной версии книги темы раскрываются подробнее: больше материала для размышления, расширенные разборы и практическая работа над собой. Сначала спокойно познакомься с бесплатным изданием — решение о покупке можно принять после чтения.</p><a class="btn" href="https://web.tribute.tg/p/IcW" target="_blank" rel="noopener">Посмотреть полную книгу ✦</a></section>
 
@@ -162,11 +208,10 @@ html{scroll-padding-top:64px}.nav{height:64px;padding:0 13px}.progress{top:64px}
 <nav class="reader-index" aria-label="Оглавление книги"><a href="#ch1">01 · Значение очищения</a><a href="#ch2">02 · Что такое нафс</a><a href="#ch3">03 · Сердце и намерение</a><a href="#ch4">04 · Болезни сердца</a><a href="#ch5">05 · Тауба</a><a href="#ch6">06 · Первые шаги</a><a href="#ch7">07 · Семь дней практики</a><a href="#sources">Источники</a></nav>
 <div class="reader-content"><section class="book-intro" id="intro">
         <div class="eyebrow">Перед чтением</div>
-        <h2>Внешняя сила и внутренняя работа</h2>
-        <p>Мужчина может выдерживать тяжёлую работу, учиться новому, заботиться о семье и строить планы. Но эти качества ещё не означают, что он научился управлять собой перед Аллахом. Иногда ему легче выдержать физическую нагрузку, чем признать собственную ошибку. Легче спорить, чем выслушать правду. Легче получить одобрение людей, чем совершить добро, о котором никто не узнает.</p>
-        <p>Очищение нафса начинается там, где заканчивается самообман. Оно не требует ненавидеть себя, презирать мир или отказываться от дозволенных стремлений. Оно требует поставить желания на своё место, подчинить поступки руководству Аллаха и воспитывать сердце через знание, поклонение, покаяние и благой нрав.</p>
-        <p>Здесь ты познакомишься с основой тазкии, разберёшь несколько опасных привычек сердца и языка и получишь план на первую неделю. Это самостоятельное введение, а не рекламный лист: оно должно принести пользу даже тому, кто пока не продолжит чтение.</p>
-        <div class="note"><strong>Как читать:</strong> не спеши. После каждой главы выбери один конкретный поступок, который можно исправить. Не пытайся изменить всю жизнь за один вечер. Смотри на реальные действия, а не только на настроение.</div>
+        <h2>Сила начинается с управления собой</h2>
+        <p>Мужчина отвечает за свои решения, слова, семью и обязательства. Но кто управляет им самим, когда поднимается гнев, говорит зависть или желание требует запретного?</p>
+        <p>Очищение нафса — это работа над внутренними побуждениями, чтобы сердце и поступки не становились заложниками страстей. Это не слабость и не отказ от амбиций. Это путь к искренности, самообладанию, покаянию и благому нраву.</p>
+        <p>В этом издании ты разберёшь основы тазкии, увидишь опасные болезни сердца и языка, изучишь примеры из Корана и Сунны и получишь первые практические шаги.</p>
       </section><section class="chapter" id="ch1">
         <div class="chapter-head"><div class="chapter-index">01</div><h2>Почему очищение нафса важно</h2></div>
         <p>В суре «аш-Шамс» говорится о душе и Том, Кто придал ей соразмерный облик, а затем указал ей нечестие и богобоязненность. Далее сказано: преуспел тот, кто очистил её, и потерпел убыток тот, кто её испортил (аш-Шамс, 91:7–10). Эти аяты помещают очищение души в центр человеческого успеха. Речь не о модной технике самосовершенствования, а о духовной ответственности перед Творцом.</p>
@@ -301,6 +346,15 @@ else targets.forEach(function(el){el.classList.add("visible")});
 var toc=Array.prototype.slice.call(document.querySelectorAll(".reader-index a"));
 var watched=toc.map(function(a){return document.querySelector(a.getAttribute("href"))}).filter(Boolean);
 if("IntersectionObserver" in window){var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)toc.forEach(function(a){a.classList.toggle("current",a.getAttribute("href")==="#"+e.target.id)})})},{rootMargin:"-20% 0px -68% 0px"});watched.forEach(function(el){io.observe(el)})}
+
+var flipCards=document.querySelectorAll(".flip-card");
+Array.prototype.forEach.call(flipCards,function(card){
+  card.addEventListener("click",function(){
+    var flipped=card.classList.toggle("is-flipped");
+    card.setAttribute("aria-pressed",flipped?"true":"false");
+  });
+});
+
 var boxes=document.querySelectorAll(".reader-content .checkline input");Array.prototype.forEach.call(boxes,function(box,i){var key="nafs-practice-"+i;box.checked=get(key)==="1";box.addEventListener("change",function(){set(key,box.checked?"1":"0")})});
 })();
 </script>
